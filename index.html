@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shahar Maoz - Resume</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- ספריות בגרסה מודרנית יותר -->
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <div class="interface-container">
+        <div class="language-toggle">
+            <button id="en-btn" class="active">English</button>
+            <button id="he-btn">עברית</button>
+        </div>
+
+        <div class="export-pdf">
+            <button id="export-pdf-btn" class="en">Export PDF</button>
+            <button id="export-pdf-btn-he" class="he hidden">ייצוא PDF</button>
+        </div>
+        
+    </div>
+
+    <div id="skill-tooltip" class="hidden">
+        <h3 id="skill-name"></h3>
+        <div id="skill-level"></div>
+        <p id="skill-category"></p>
+    </div>
+
+    <div class="resume-container" id="resume-content">
+        <div class="left-column">
+            <div class="profile-section">
+                <div class="name-title">
+                    <h1 class="first-name en">SHAHAR</h1>
+                    <h1 class="last-name en">MAOZ</h1>
+                    <h1 class="first-name he hidden">שחר</h1>
+                    <h1 class="last-name he hidden">מעוז</h1>
+                </div>
+                <div class="title">
+                    <p class="en">SOFTWARE DEVELOPER | TEACHER | MUSICIAN</p>
+                    <p class="he hidden">מפתח תוכנה | מורה | מוזיקאי</p>
+                </div>
+                <div class="contact">
+                    <p class="en">+972 52 534 7274</p>
+                    <p class="he hidden">052-534-7274</p>
+                    <p class="en"><a href="mailto:rakloze@gmail.com">rakloze@gmail.com</a></p>
+                    <p class="he hidden">rakloze@gmail.com</p>
+                </div>
+            </div>
+
+            <div class="intro-section">
+                <h2 class="en">I AM SHAHAR</h2>
+                <h2 class="he hidden">אני שחר</h2>
+                <ul>
+                    <li class="en">Full Stack Developer with over 15 years of experience as an educator, musician, and performer.</li>
+                    <li class="he hidden">מפתח פול סטאק עם יותר מ-15 שנות ניסיון כמחנך, מוזיקאי ומבצע.</li>
+                    
+                    <li class="en">Transitioned into tech, combining creativity with impactful problem-solving through code.</li>
+                    <li class="he hidden">עברתי לעולם הטכנולוגיה, משלב יצירתיות עם פתרון בעיות משמעותי באמצעות קוד.</li>
+                    
+                    <li class="en">Proficient in JavaScript, TypeScript, Node.js, React, SQL, Docker, and Python.</li>
+                    <li class="he hidden">בקיא ב-JavaScript, TypeScript, Node.js, React, SQL, Docker, ו-Python.</li>
+                    
+                    <li class="en">Independently self-taught, leveraging it to learn about new technologies and build automation tools and custom solutions and workflow optimization.</li>
+                    <li class="he hidden">אוטודידקט לומד ומתנסה לבד על טכנולוגיות חדשות ובניית כלי אוטומציה ופתרונות מותאמים אישית ואופטימיזציה של תהליכי עבודה.</li>
+                    
+                    <li class="en">Skilled in mentoring, collaboration, and simplifying complex technical concepts into clear, actionable steps.</li>
+                    <li class="he hidden">מיומן בחניכה, שיתוף פעולה, והפיכת מושגים טכניים מורכבים לצעדים ברורים וישימים.</li>
+                </ul>
+            </div>
+
+            <div class="links-section">
+                <h2 class="en">LINKS</h2>
+                <h2 class="he hidden">קישורים</h2>
+                <ul>
+                    <li>
+                        <span class="en">GitHub:</span>
+                        <span class="he hidden">גיטהאב:</span>
+                        <a href="https://github.com/ShaharFullStack" target="_blank">https://github.com/ShaharFullStack</a>
+                    </li>
+                    <li>
+                        <span class="en">LinkedIn:</span>
+                        <span class="he hidden">לינקדאין:</span>
+                        <a href="https://www.linkedin.com/in/shahar-maozh/" target="_blank">https://www.linkedin.com/in/shahar-maozh/</a>
+                    </li>
+                    <li>
+                        <span class="en">Portfolio:</span>
+                        <span class="he hidden">פורטפוליו:</span>
+                        <a href="https://rakloze.github.io/shahar/" target="_blank">https://rakloze.github.io/shahar/</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="languages-section">
+                <h2 class="en">LANGUAGES</h2>
+                <h2 class="he hidden">שפות</h2>
+                <ul>
+                    <li class="en">Hebrew</li>
+                    <li class="he hidden">עברית</li>
+                    <li class="en">English</li>
+                    <li class="he hidden">אנגלית</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="right-column">
+            <div class="work-section">
+                <h2 class="en">WORK EXPERIENCE</h2>
+                <h2 class="he hidden">ניסיון תעסוקתי</h2>
+                
+                <div class="job">
+                    <h3 class="en">SOFTWARE DEVELOPER</h3>
+                    <h3 class="he hidden">מפתח תוכנה</h3>
+                    <h4 class="en">FREELANCE</h4>
+                    <h4 class="he hidden">פרילנס</h4>
+                    <h5 class="en">FEB 2022 - PRESENT</h5>
+                    <h5 class="he hidden">פברואר 2022 - היום</h5>
+                    <ul>
+                        <li class="en">Created tools using JavaScript and TypeScript to enhance learning experiences for students, including interactive practice applications.</li>
+                        <li class="he hidden">יצרתי כלים באמצעות JavaScript ו-TypeScript לשיפור חוויות למידה לתלמידים, כולל יישומי תרגול אינטראקטיביים.</li>
+                        
+                        <li class="en">Developed custom Python bots for social network integration, automating engagement and data retrieval.</li>
+                        <li class="he hidden">פיתחתי בוטים מותאמים אישית ב-Python לאינטגרציה ברשתות חברתיות, אוטומציה של מעורבות ואחזור נתונים.</li>
+                        
+                        <li class="en">Built financial management tools tailored for private teachers and performers, optimizing workflows and improving efficiency.</li>
+                        <li class="he hidden">בניתי כלים לניהול פיננסי המותאמים למורים פרטיים ואמנים, לייעול תהליכי עבודה ושיפור היעילות.</li>
+                        
+                        <li class="en">Designed solutions that simplify complex concepts, combining technical precision with a user-centric approach.</li>
+                        <li class="he hidden">תכננתי פתרונות המפשטים מושגים מורכבים, המשלבים דיוק טכני עם גישה ממוקדת משתמש.</li>
+                    </ul>
+                </div>
+                
+                <div class="job">
+                    <h3 class="en">MUSICIAN, MUSIC TEACHER, AND EVENT MANAGER</h3>
+                    <h3 class="he hidden">מוזיקאי, מורה למוזיקה, ומנהל אירועים</h3>
+                    <h4 class="en">GORDON ELEMENTARY | SHAMIR ELEMENTARY | MUSIC AND DANCE CONSERVATORY | FREELANCE</h4>
+                    <h4 class="he hidden">בית ספר גורדון | בית ספר שמיר | קונסרבטוריון למוזיקה ומחול | פרילנס</h4>
+                    <h5 class="en">JAN 2007 - PRESENT</h5>
+                    <h5 class="he hidden">ינואר 2007 - היום</h5>
+                    <ul>
+                        <li class="en">Provided tailored music instruction, equipping students for matriculation exams, auditions, and public recitals.</li>
+                        <li class="he hidden">סיפקתי הדרכה מוזיקלית מותאמת אישית, והכנתי תלמידים לבחינות בגרות, אודישנים ומופעים פומביים.</li>
+                        
+                        <li class="en">Orchestrated scheduling and coordination for ensemble rehearsals and performances, notably at the Israeli Knesset.</li>
+                        <li class="he hidden">ארגנתי תיאום וניהול לחזרות והופעות של אנסמבלים, בין היתר בכנסת ישראל.</li>
+                        
+                        <li class="en">Conducted a 200-member choir for a high-profile inauguration event attended by distinguished national figures.</li>
+                        <li class="he hidden">ניצחתי על מקהלה של 200 חברים באירוע חנוכה יוקרתי בנוכחות אישים לאומיים בכירים.</li>
+                        
+                        <li class="en">Enhanced event visibility and audience growth through effective use of social media and targeted marketing strategies.</li>
+                        <li class="he hidden">הגברתי את הנראות של אירועים וצמיחת הקהל באמצעות שימוש יעיל במדיה חברתית ואסטרטגיות שיווק ממוקדות.</li>
+                    </ul>
+                </div>
+                
+                <div class="job">
+                    <h3 class="en">MUSIC EMPOWERMENT SPECIALIST</h3>
+                    <h3 class="he hidden">מומחה העצמה באמצעות מוזיקה</h3>
+                    <h4 class="en">IMAGINE – NONPROFIT FOR CHILDREN WITH SPECIAL NEEDS</h4>
+                    <h4 class="he hidden">IMAGINE – עמותה לילדים עם צרכים מיוחדים</h4>
+                    <h5 class="en">JAN 2017 - JAN 2019</h5>
+                    <h5 class="he hidden">ינואר 2017 - ינואר 2019</h5>
+                    <ul>
+                        <li class="en">Designed and led inclusive, technology-driven music sessions using tools like iPads and custom-built applications.</li>
+                        <li class="he hidden">תכננתי והובלתי שיעורי מוזיקה מכילים מבוססי טכנולוגיה, באמצעות כלים כמו iPad ואפליקציות בהתאמה אישית.</li>
+                        
+                        <li class="en">Focused on highlighting abilities by 'taking the 'dis' out of disability,' creating personalized tools and lesson plans for students with disabilities.</li>
+                        <li class="he hidden">התמקדתי בהדגשת היכולות על ידי 'הסרת ה-dis מהמונח disability', יצירת כלים מותאמים אישית ותכניות לימוד לתלמידים עם מוגבלויות.</li>
+                        
+                        <li class="en">Collaborated with therapists, educators and musicians to align activities with therapeutic goals without canceling the artistic and pedagogic methods, fostering measurable progress.</li>
+                        <li class="he hidden">שיתפתי פעולה עם מטפלים, מחנכים ומוזיקאים כדי להתאים פעילויות למטרות טיפוליות מבלי לבטל את השיטות האמנותיות והפדגוגיות, וקידמתי התקדמות מדידה.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="education-section">
+                <h2 class="en">RELEVANT EDUCATION</h2>
+                <h2 class="he hidden">השכלה רלוונטית</h2>
+                <h3 class="en">FULL STACK WEB DEVELOPMENT</h3>
+                <h3 class="he hidden">פיתוח אתרים פול סטאק</h3>
+                <h4 class="en">JOHN BRYCE TRAINING (MATRIX GROUP)</h4>
+                <h4 class="he hidden">ג'ון ברייס הדרכה (קבוצת מטריקס)</h4>
+                <h5 class="en">2024</h5>
+                <h5 class="he hidden">2024</h5>
+            </div>
+            
+            <div class="skills-section">
+                <h2 class="en">SKILLS</h2>
+                <h2 class="he hidden">מיומנויות</h2>
+                <div class="skills-grid">
+                    <div class="skill">HTML</div>
+                    <div class="skill">CSS</div>
+                    <div class="skill">SQL</div>
+                    <div class="skill">Node.js</div>
+                    <div class="skill">React</div>
+                    <div class="skill">Angular</div>
+                    <div class="skill">JavaScript</div>
+                    <div class="skill">TypeScript</div>
+                    <div class="skill">Mongoose</div>
+                    <div class="skill">MySQL</div>
+                    <div class="skill">MongoDB</div>
+                    <div class="skill">Python</div>
+                    <div class="skill">AWS</div>
+                    <div class="skill">Docker</div>
+                    <div class="skill">Workbench</div>
+                    <div class="skill">Git</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="three-container"></div>
+
+    <!-- שימוש במודולים של JS -->
+    <script type="module" src="script.js"></script>
+</body>
+</html>
