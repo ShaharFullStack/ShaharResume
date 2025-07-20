@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html id="html-root" lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>שחר מעוז - טכנולוג קריאייטיב ומפתח פול סטאק</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        /* Base styles */
+        :root {
+            --primary-color: #4f46e5;
+            --primary-hover: #3730a3;
+            --background: #f8fafc;
+            --surface: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+            --accent: #eef2ff;
+            --accent-hover: #e0e7ff;
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #6366f1;
+            --primary-hover: #8b5cf6;
+            --background: #0f172a;
+            --surface: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --border: #334155;
+            --accent: #1e293b;
+            --accent-hover: #334155;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--background);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        body[lang="he"] {
+            --font-family: 'Assistant', sans-serif;
+        }
+
+        body[lang="en"] {
+            --font-family: 'Inter', sans-serif;
+        }
+
+        .surface-bg {
+            background-color: var(--surface);
+        }
+
+        .text-primary {
+            color: var(--text-primary);
+        }
+
+        .text-secondary {
+            color: var(--text-secondary);
+        }
+
+        .border-color {
+            border-color: var(--border);
+        }
+
+        .link-style {
+            color: var(--primary-color);
+            font-weight: 600;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .link-style:hover {
+            color: var(--primary-hover);
+            text-decoration: underline;
+        }
+
+        .section-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .tag {
+            display: inline-block;
+            background-color: var(--accent);
+            color: var(--primary-color);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin: 0.25rem;
+            transition: all 0.2s;
+            border: 1px solid var(--border);
+        }
+
+        .tag:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-1px);
+        }
+
+        .control-buttons {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 50;
+            display: flex;
+            gap: 12px;
+            flex-direction: column;
+        }
+
+        .control-button {
+            background: var(--surface);
+            border: 2px solid var(--border);
+            color: var(--text-primary);
+            padding: 12px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .control-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            border-color: var(--primary-color);
+        }
+
+        .print-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 50;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 16px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            box-shadow: 0 4px 20px rgba(79, 70, 229, 0.3);
+        }
+
+        .print-button:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 8px 30px rgba(79, 70, 229, 0.4);
+        }
+
+        .project-card, .experience-item {
+            background-color: var(--accent);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary-color);
+        }
+
+        .main-container {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+        }
+
+        /* Animation for smooth transitions */
+        .fade-transition {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .fade-transition.visible {
+            opacity: 1;
+        }
+
+        /* Print styles remain the same but with theme awareness */
+        @media print {
+            .control-buttons,
+            .print-button {
+                display: none !important;
+            }
+
+            body {
+                background-color: #fff !important;
+                color: #000 !important;
+            }
+
+            .main-container {
+                background-color: #fff !important;
+                border: none !important;
+            }
+
+            .section-title {
+                color: #000 !important;
+                border-bottom-color: #000 !important;
+            }
+
+            .link-style {
+                color: #0000ee !important;
+            }
+
+            .tag {
+                background-color: #eee !important;
+                color: #000 !important;
+                border-color: #ddd !important;
+            }
+
+            .project-card, .experience-item {
+                background-color: #fdfdfd !important;
+                border-color: #e5e5e5 !important;
+            }
+
+            @page {
+                margin: 0.4in;
+                size: A4;
+            }
+
+            body {
+                font-size: 9pt !important;
+                line-height: 1.2 !important;
+            }
+
+            h1 {
+                font-size: 18pt !important;
+                font-weight: bold !important;
+                margin: 0 0 3pt 0 !important;
+            }
+
+            .section-title {
+                font-size: 11pt !important;
+                font-weight: bold !important;
+                padding-bottom: 1.5pt !important;
+                margin: 8pt 0 4pt 0 !important;
+            }
+
+            p, li {
+                font-size: 9pt !important;
+                line-height: 1.25 !important;
+                margin-top: 1pt !important;
+                margin-bottom: 1pt !important;
+            }
+
+            .tag {
+                font-size: 7.5pt !important;
+                padding: 1pt 4pt !important;
+                margin: 1pt !important;
+            }
+
+            .project-card, .experience-item {
+                padding: 4pt !important;
+                margin-bottom: 4pt !important;
+                break-inside: avoid;
+            }
+
+            h3 {
+                font-size: 10pt !important;
+                font-weight: bold !important;
+                margin-bottom: 1pt !important;
+            }
+        }
+    </style>
+</head>
+<body lang="he" class="transition-all duration-300">
+    <!-- Control Buttons -->
+    <div class="control-buttons">
+        <button id="theme-toggle" class="control-button">
+            <svg id="theme-icon" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+            </svg>
+            <span id="theme-text">ערכת נושא כהה</span>
+        </button>
+        
+        <button id="language-toggle" class="control-button">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/>
+            </svg>
+            <span id="language-text">English</span>
+        </button>
+    </div>
+
+    <!-- Print Button -->
+    <button onclick="window.print()" class="print-button">
+        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+        </svg>
+        <span id="print-text">הדפס / שמור כ-PDF</span>
+    </button>
+
+    <div class="max-w-5xl mx-auto p-6 sm:p-8 md:p-10 main-container shadow-2xl rounded-lg my-8">
+        <!-- Header Section -->
+        <header class="text-center mb-12">
+            <h1 id="name" class="text-4xl md:text-5xl font-bold text-primary">שחר מעוז</h1>
+            <p id="title" class="text-lg md:text-xl font-bold mt-2" style="color: var(--primary-color);">
+                טכנולוג קריאייטיב ומפתח פול סטאק | פיתוח MVP וחוויות אינטראקטיביות
+            </p>
+            <div class="contact-info mt-6 flex flex-wrap justify-center items-center gap-x-6 gap-y-3 text-sm md:text-base">
+                <a href="mailto:rakloze@gmail.com" class="link-style flex items-center gap-2">
+                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                    rakloze@gmail.com
+                </a>
+                <a href="tel:+972525347274" class="link-style flex items-center gap-2" style="direction: ltr;">
+                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                    +972-52-534-7274
+                </a>
+                <a href="https://github.com/ShaharFullStack" target="_blank" class="link-style flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    <span id="github-text">גיטהאב</span>
+                </a>
+                <a href="https://www.linkedin.com/in/shaharmh/" target="_blank" class="link-style flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    <span id="linkedin-text">לינקדאין</span>
+                </a>
+                <a href="https://shaharportfolio.web.app" target="_blank" class="link-style flex items-center gap-2">
+                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" /></svg>
+                    <span id="portfolio-text">פורטפוליו</span>
+                </a>
+            </div>
+        </header>
+
+        <!-- Professional Summary -->
+        <section>
+            <h2 id="summary-title" class="section-title">תקציר מקצועי</h2>
+            <div id="summary-content">
+                <p class="text-base leading-relaxed mb-3">
+                    מפתח פול סטאק ומתכנן מוצר המתמחה ביצירת מוצרים דיגיטליים שמשלבים טכנולוגיה מתקדמת עם חווית משתמש מעולה וחדשנות יצירתית. אני עוזר לסטארטאפים, עסקים קטנים ויזמים להוציא רעיונות מהראש למציאות מוחשית — החל ממוצרי MVP ואפליקציות רשת, ועד לחוויות אינטראקטיביות ייחודיות שמשלבות מוזיקה, גרפיקה וטכנולוגיות נגישות.
+                </p>
+                <p class="text-base leading-relaxed mb-3">
+                    אני מתמחה בהפיכת רעיונות גולמיים למוצרים פועלים דרך פיתוח מהיר של אבות טיפוס, עיצוב חוויית משתמש מחושב ושיטות פיתוח זריזות. המטרה שלי היא לספק פתרונות מקצה לקצה שמכסים תכנון מוצר, עיצוב ממשקים, פיתוח והעלאה לרשת. הגישה שלי לכל פרויקט היא לא רק של מפתח, אלא של איש מוצר שמבין אנשים, טכנולוגיה ויעדים עסקיים.
+                </p>
+                <p class="text-base leading-relaxed">
+                    אני מביא אנרגיה רעננה, סקרנות ורצון אמיתי לספק תוצאות איכותיות ולהוכיח את הערך שאני יכול להביא לכל פרויקט.
+                </p>
+            </div>
+        </section>
+
+        <!-- Core Skills & Technologies -->
+        <section>
+            <h2 id="skills-title" class="section-title">כישורים וטכנולוגיות</h2>
+            <div id="skills-content" class="flex flex-wrap -m-1">
+                <span class="tag">JavaScript (ES6+)</span><span class="tag">TypeScript</span><span class="tag">React</span><span class="tag">Angular</span><span class="tag">Node.js</span><span class="tag">Python</span><span class="tag">Three.js</span><span class="tag">Cannon.js</span><span class="tag">MediaPipe</span><span class="tag">Tone.js</span><span class="tag">WebGL</span><span class="tag">Web Audio API</span><span class="tag">MVP Development</span><span class="tag">Rapid Prototyping</span><span class="tag">Product Thinking</span><span class="tag">UX Strategy</span><span class="tag">Git</span><span class="tag">Docker</span><span class="tag">Firebase</span><span class="tag">AWS</span><span class="tag">MongoDB</span><span class="tag">SQL</span><span class="tag">Creative Coding</span><span class="tag">Accessibility Solutions</span><span class="tag">EdTech</span><span class="tag">Game Development</span>
+            </div>
+        </section>
+
+        <!-- Selected Projects -->
+        <section>
+            <h2 id="projects-title" class="section-title">פרויקטים נבחרים</h2>
+            <div id="projects-content" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="project-card transition-shadow hover:shadow-xl">
+                    <h3 class="font-bold text-lg text-primary">HandSynth</h3>
+                    <p class="mt-1 mb-3 text-base leading-relaxed">
+                        כלי נגינה אינטראקטיבי מבוסס-ווב המתרגם תנועות ידיים לאודיו וויזואליה בזמן אמת. מיועד לשיפור הנגישות עבור ילדים עם צרכים מיוחדים באמצעות מוזיקה ומשחק יצירתי.
+                    </p>
+                    <div>
+                        <a href="https://shaharfullstack.github.io/HandSynthBetter/" target="_blank" class="link-style ml-4">דמו חי</a>
+                        <a href="https://github.com/ShaharFullStack/HandSynthBetter" target="_blank" class="link-style">גיטהאב</a>
+                    </div>
+                </div>
+                <div class="project-card transition-shadow hover:shadow-xl">
+                    <h3 class="font-bold text-lg text-primary">BalloonGame</h3>
+                    <p class="mt-1 mb-3 text-base leading-relaxed">
+                        משחק דפדפן דו-ממדי המדגים מכניקות משחק מתקדמות ומעורבות משתמשים. כולל שליטה בדמות, ניווט מכשולים ומכניקת איסוף עם פיזיקה ריאליסטית וחווית משתמש אינטואיטיבית.
+                    </p>
+                    <div>
+                        <a href="https://shaharfullstack.github.io/BalloonGame/" target="_blank" class="link-style ml-4">דמו חי</a>
+                        <a href="https://github.com/ShaharFullStack/BalloonGame" target="_blank" class="link-style">גיטהאב</a>
+                    </div>
+                </div>
+                <div class="project-card transition-shadow hover:shadow-xl">
+                    <h3 class="font-bold text-lg text-primary">3D Flight Simulator</h3>
+                    <p class="mt-1 mb-3 text-base leading-relaxed">
+                        סימולטור טיסה תלת-ממדי מבוסס-ווב המציג יכולות WebGL מתקדמות ועיצוב חווית משתמש מרחבית. מותאם לביצועי דפדפן וחוויה אימרסיבית.
+                    </p>
+                    <div>
+                        <a href="https://shaharfullstack.github.io/3DFlightSimulator/" target="_blank" class="link-style ml-4">דמו חי</a>
+                        <a href="https://github.com/ShaharFullStack/3DFlight" target="_blank" class="link-style">גיטהאב</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Professional Experience -->
+        <section>
+            <h2 id="experience-title" class="section-title">ניסיון מקצועי</h2>
+            <div id="experience-content" class="space-y-8">
+                <div class="experience-item">
+                    <div class="flex flex-col sm:flex-row justify-between sm:items-baseline">
+                        <h3 class="font-bold text-lg text-primary">פרילנסר - מפתח פול סטאק וטכנולוג קריאייטיב</h3>
+                        <p class="font-medium text-secondary text-sm sm:text-base">2022 – היום</p>
+                    </div>
+                    <ul class="list-disc list-inside mt-2 space-y-2 text-base leading-relaxed">
+                        <li>פיתוח פתרונות דיגיטליים מקצה לקצה עבור סטארטאפים ועסקים קטנים, החל משלב הרעיון ופיתוח MVP ועד לדיפלוימנט וסקייל.</li>
+                        <li>יצירת כלים אינטראקטיביים ממוקדי-נגישות המשלבים מוזיקה, ויזואליה ואינטראקציית מצלמת רשת עבור ארגונים לבעלי צרכים מיוחדים. <a href="https://shaharfullstack.github.io/fluidHands/" class="link-style">(צפייה בפרויקט)</a></li>
+                        <li>בניית אפליקציות ווב מותאמות אישית הממזגות עיצוב UX, תיאוריה מוזיקלית וטכנולוגיות ווב מודרניות לשיפור מעורבות משתמשים. <a href="https://shaharfullstack.github.io/ChordBlast/" class="link-style">(צפייה בפרויקט)</a></li>
+                        <li>תכנון פתרונות אוטומציה באמצעות Puppeteer ו-Node.js עבור מוזיקאים ויוצרי תוכן, לייעול תהליכי עבודה. <a href="https://drive.google.com/file/d/1A8Ifpv-LHKC-ZB2iy0zcjeaFX_Qlyqf5/view" class="link-style">(סרטון הדגמה)</a></li>
+                        <li>אספקת פתרונות עסקיים בפול סטאק כולל אתרי פורטפוליו ופלטפורמות מסחר אלקטרוני. <a href="https://sfez-nadlan.web.app/" class="link-style">(דוגמה עסקית)</a></li>
+                        <li><strong>הישג:</strong> זכייה במקום השני בתחרות GameJam עם רימייק תלת-ממדי חדשני למשחק Scorched Earth, תוך הפגנת יכולות פיתוח אב-טיפוס מהיר ופתרון בעיות יצירתי.</li>
+                    </ul>
+                </div>
+                <div class="experience-item">
+                    <div class="flex flex-col sm:flex-row justify-between sm:items-baseline">
+                        <h3 class="font-bold text-lg text-primary">מוזיקאי, מחנך ומנהל אירועים</h3>
+                        <p class="font-medium text-secondary text-sm sm:text-base">2007 – 2022</p>
+                    </div>
+                    <p class="italic text-secondary">מוסדות שונים (ישראל)</p>
+                    <ul class="list-disc list-inside mt-2 space-y-2 text-base leading-relaxed">
+                        <li>הובלת תוכניות חינוכיות המשלבות טכנולוגיה ומוזיקה, ופיתוח תכניות לימודים שהגבירו את מעורבות התלמידים באמצעות שילוב כלים דיגיטליים.</li>
+                        <li>ניהול אירועים והופעות רחבי-היקף עם עד 200 משתתפים וקהל של מעל 1,000 איש, תוך פיתוח מיומנויות ניהול פרויקטים ותיאום מול בעלי עניין.</li>
+                        <li>פיתוח מומחיות בחוויית משתמש דרך אופטימיזציה של מעורבות קהל ועיצוב זרימת אירועים.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education -->
+        <section>
+            <h2 id="education-title" class="section-title">השכלה</h2>
+            <div id="education-content">
+                <div class="flex flex-col sm:flex-row justify-between sm:items-baseline">
+                    <h3 class="font-bold text-lg text-primary">פיתוח פול סטאק – מסלול הכשרת מפתחי תוכנה</h3>
+                    <p class="font-medium text-secondary text-sm sm:text-base">2023</p>
+                </div>
+                <p class="italic text-secondary">ג'ון ברייס (קבוצת מטריקס)</p>
+                <p class="mt-2 text-base leading-relaxed">
+                    הכשרה מקיפה בטכנולוגיות פיתוח ווב מודרניות כולל HTML, CSS, JavaScript, React, Node.js, TypeScript, SQL ודיפלוימנט של אפליקציות פול-סטאק מוכנות לפרודקשן.
+                </p>
+                <p class="mt-1 text-base leading-relaxed">
+                    <strong class="font-semibold">פרויקט גמר:</strong> מערכת ניהול חופשות ברמה ארגונית הכוללת אימות משתמשים, ניהול הזמנות בזמן אמת, קונטיינריזציה עם דוקר ודיפלוימנט לענן AWS.
+                </p>
+            </div>
+        </section>
+
+        <!-- Languages -->
+        <section>
+            <h2 id="languages-title" class="section-title">שפות</h2>
+            <p id="languages-content" class="text-base">
+                <span class="font-semibold">עברית</span> – שפת אם |
+                <span class="font-semibold">אנגלית</span> – רמה גבוהה
+            </p>
+        </section>
+    </div>
+
+    <script>
+        // Translations object
+        const translations = {
+            he: {
+                name: "שחר מעוז",
+                title: "טכנולוג קריאייטיv ומפתח פול סטאק | פיתוח MVP וחוויות אינטראקטיביות",
+                githubText: "גיטהאב",
+                linkedinText: "לינקדאין",
+                portfolioText: "פורטפוליו",
+                printText: "הדפס / שמור כ-PDF",
+                themeText: "ערכת נושא כהה",
+                languageText: "English",
+                summaryTitle: "תקציר מקצועי",
+                summaryContent: `
+                    <p class="text-base leading-relaxed mb-3">
+                        מפתח פול סטאק ומתכנן מוצר המתמחה ביצירת מוצרים דיגיטליים שמשלבים טכנולוגיה מתקדמת עם חווית משתמש מעולה וחדשנות יצירתית. אני עוזר לסטארטאפים, עסקים קטנים ויזמים להוציא רעיונות מהראש למציאות מוחשית — החל ממוצרי MVP ואפליקציות רשת, ועד לחוויות אינטראקטיביות ייחודיות שמשלבות מוזיקה, גרפיקה וטכנולוגיות נגישות.
+                    </p>
+                    <p class="text-base leading-relaxed mb-3">
+                        אני מתמחה בהפיכת רעיונות גולמיים למוצרים פועלים דרך פיתוח מהיר של אבות טיפוס, עיצוב חוויית משתמש מחושב ושיטות פיתוח זריזות. המטרה שלי היא לספק פתרונות מקצה לקצה שמכסים תכנון מוצר, עיצוב ממשקים, פיתוח והעלאה לרשת. הגישה שלי לכל פרויקט היא לא רק של מפתח, אלא של איש מוצר שמבין אנשים, טכנולוגיה ויעדים עסקיים.
+                    </p>
+                    <p class="text-base leading-relaxed">
+                        אני מביא אנרגיה רעננה, סקרנות ורצון אמיתי לספק תוצאות איכותיות ולהוכיח את הערך שאני יכול להביא לכל פרויקט.
+                    </p>
+                `,
+                skillsTitle: "כישורים וטכנולוגיות",
+                projectsTitle: "פרויקטים נבחרים",
+                projectsContent: `
+                    <div class="project-card transition-shadow hover:shadow-xl">
+                        <h3 class="font-bold text-lg text-primary">HandSynth</h3>
+                        <p class="mt-1 mb-3 text-base leading-relaxed">
+                            כלי נגינה אינטראקטיבי מבוסס-ווב המתרגם תנועות ידיים לאודיו וויזואליה בזמן אמת. מיועד לשיפור הנגישות עבור ילדים עם צרכים מיוחדים באמצעות מוזיקה ומשחק יצירתי.
+                        </p>
+                        <div>
+                            <a href="https://shaharfullstack.github.io/HandSynthBetter/" target="_blank" class="link-style ml-4">דמו חי</a>
+                            <a href="https://github.com/ShaharFullStack/HandSynthBetter" target="_blank" class="link-style">גיטהאב</a>
+                        </div>
+                    </div>
+                    <div class="project-card transition-shadow hover:shadow-xl">
+                        <h3 class="font-bold text-lg text-primary">BalloonGame</h3>
+                        <p class="mt-1 mb-3 text-base leading-relaxed">
+                            משחק דפדפן דו-ממדי המדגים מכניקות משחק מתקדמות ומעורבות משתמשים. כולל שליטה בדמות, ניווט מכשולים ומכניקת איסוף עם פיזיקה ריאליסטית וחווית משתמש אינטואיטיבית.
+                        </p>
+                        <div>
+                            <a href="https://shaharfullstack.github.io/BalloonGame/" target="_blank" class="link-style ml-4">דמו חי</a>
+                            <a href="https://github.com/ShaharFullStack/BalloonGame" target="_blank" class="link-style">גיטהאב</a>
+                        </div>
+                    </div>
+                    <div class="project-card transition-shadow hover:shadow-xl">
+                        <h3 class="font-bold text-lg text-primary">3D Flight Simulator</h3>
+                        <p class="mt-1 mb-3 text-base leading-relaxed">
+                            סימולטור טיסה תלת-ממדי מבוסס-ווב המציג יכולות WebGL מתקדמות ועיצוב חווית משתמש מרחבית. מותאם לביצועי דפדפן וחוויה אימרסיבית.
+                        </p>
+                        <div>
+                            <a href="https://shaharfullstack.github.io/3DFlightSimulator/" target="_blank" class="link-style ml-4">דמו חי</a>
+                            <a href="https://github.com/ShaharFullStack/3DFlight" target="_blank" class="link-style">גיטהאב</a>
+                        </div>
+                    </div>
+                `,
+                experienceTitle: "ניסיון מקצועי",
+                experienceContent: `
+                    <div class="experience-item">
+                        <div class="flex flex-col sm:flex-row justify-between sm:items-baseline">
+                            <h3 class="font-bold text-lg text-primary">פרילנסר - מפתח פול סטאק וטכנולוג קריאייטיב</h3>
+                            <p class="font-medium text-secondary text-sm sm:text-base">2022 – היום</p>
+                        </div>
+                        <ul class="list-disc list-inside mt-2 space-y-2 text-base leading-relaxed">
+                            <li>פיתוח פתרונות דיגיטליים מקצה לקצה עבור סטארטאפים ועסקים קטנים, החל משלב הרעיון ופיתוח MVP ועד לדיפלוימנט וסקייל.</li>
+                            <li>יצירת כלים אינטראקטיביים ממוקדי-נגישות המשלבים מוזיקה, ויזואליה ואינטראקציית מצלמת רשת עבור ארגונים לבעלי צרכים מיוחדים. <a href="https://shaharfullstack.github.io/fluidHands/" class="link-style">(צפייה בפרויקט)</a></li>
+                            <li>בניית אפליקציות ווב מותאמות אישית הממזגות עיצוב UX, תיאוריה מוזיקלית וטכנולוגיות ווב מודרניות לשיפור מעורבות משתמשים. <a href="https://shaharfullstack.github.io/ChordBlast/" class="link-style">(צפייה בפרויקט)</a></li>
+                            <li>תכנון פתרונות אוטומציה באמצעות Puppeteer ו-Node.js עבור מוזיקאים ויוצרי תוכן, לייעול תהליכי עבודה. <a href="https://drive.google.com/file/d/1A8Ifpv-LHKC-ZB2iy0zcjeaFX_Qlyqf5/view" class="link-style">(סרטון הדגמה)</a></li>
+                            <li>אספקת פתרונות עסקיים בפול סטאק כולל אתרי פורטפוליו ופלטפורמות מסחר אלקטרוני. <a href="https://sfez-nadlan.web.app/" class="link-style">(דוגמה עסקית)</a></li>
+                            <li><strong>הישג:</strong> זכייה במקום השני בתחרות GameJam עם רימייק תלת-ממדי חדשני למשחק Scorched Earth, תוך הפגנת יכולות פיתוח אב-טיפוס מהיר ופתרון בעיות יצירתי.</li>
+                        </ul>
+                    </div>
+                    <div class="experience-item">
+                        <div class="flex flex-col sm:flex-row justify-between sm:items-baseline">
+                            <h3 class="font-bold text-lg text-primary">מוזיקאי, מחנך ומנהל אירועים</h3>
+                            <p class="font-medium text-secondary text-sm sm:text-base">2007 – 2022</p>
+                        </div>
+                        <p class="italic text-secondary">מוסדות שונים (ישראל)</p>
+                        <ul class="list-disc list-inside mt-2 space-y-2 text-base leading-relaxed">
+                            <li>הובלת תוכניות חינוכיות המשלבות טכנולוגיה ומוזיקה, ופיתוח תכניות לימודים שהגבירו את מעורבות התלמידים באמצעות שילוב כלים דיגיטליים.</li>
+                            <li>ניהול אירועים והופעות רחבי-היקף עם עד 200 משתתפים וקהל של מעל 1,000 איש, תוך פיתוח מיומנויות ניהול פרויקטים ותיאום מול בעלי עניין.</li>
+                            <li>פיתוח מומחיות בחוויית משתמש דרך אופטימיזציה של מעורבות קהל ועיצוב זרימת אירועים.</li>
+                        </ul>
+                    </div>
+                `,
+                educationTitle: "השכלה",
+                educationContent: `
+                    <div class="flex flex-col sm:flex-row justify-between sm:items-baseline">
+                        <h3 class="font-bold text-lg text-primary">פיתוח פול סטאק – מסלול הכשרת מפתחי תוכנה</h3>
+                        <p class="font-medium text-secondary text-sm sm:text-base">2023</p>
+                    </div>
+                    <p class="italic text-secondary">ג'ון ברייס (קבוצת מטריקס)</p>
+                    <p class="mt-2 text-base leading-relaxed">
+                        הכשרה מקיפה בטכנולוגיות פיתוח ווב מודרניות כולל HTML, CSS, JavaScript, React, Node.js, TypeScript, SQL ודיפלוימנט של אפליקציות פול-סטאק מוכנות לפרודקשן.
+                    </p>
+                    <p class="mt-1 text-base leading-relaxed">
+                        <strong class="font-semibold">פרויקט גמר:</strong> מערכת ניהול חופשות ברמה ארגונית הכוללת אימות משתמשים, ניהול הזמנות בזמן אמת, קונטיינריזציה עם דוקר ודיפלוימנט לענן AWS.
+                    </p>
+                `,
+                languagesTitle: "שפות",
+                languagesContent: `
+                    <span class="font-semibold">עברית</span> – שפת אם |
+                    <span class="font-semibold">אנגלית</span> – רמה גבוהה
+                `
+            },
+            en: {
+                name: "Shahar Maoz",
+                title: "Creative Technologist & Full Stack Developer | MVP Development & Interactive Experiences",
+                githubText: "GitHub",
+                linkedinText: "LinkedIn",
+                portfolioText: "Portfolio",
+                printText: "Print / Save as PDF",
+                themeText: "Dark Theme",
+                languageText: "עברית",
+                summaryTitle: "Professional Summary",
+                summaryContent: `
+                    <p class="text-base leading-relaxed mb-3">
+                        Full Stack Developer and Product Designer specializing in creating digital products that combine advanced technology with excellent user experience and creative innovation. I help startups, small businesses, and entrepreneurs transform ideas from concept to tangible reality — from MVP products and web applications to unique interactive experiences that integrate music, graphics, and accessibility technologies.
+                    </p>
+                    <p class="text-base leading-relaxed mb-3">
+                        I specialize in transforming raw ideas into working products through rapid prototyping, calculated UX design, and agile development methodologies. My goal is to provide end-to-end solutions covering product planning, interface design, development, and deployment. My approach to every project is not just as a developer, but as a product person who understands people, technology, and business objectives.
+                    </p>
+                    <p class="text-base leading-relaxed">
+                        I bring fresh energy, curiosity, and a genuine desire to deliver quality results and prove the value I can bring to every project.
+                    </p>
+                `,
+                skillsTitle: "Skills & Technologies",
+                projectsTitle: "Selected Projects",
+                projectsContent: `
+                    <div class="project-card transition-shadow hover:shadow-xl">
+                        <h3 class="font-bold text-lg text-primary">HandSynth</h3>
+                        <p class="mt-1 mb-3 text-base leading-relaxed">
+                            An interactive web-based musical instrument that translates hand movements into real-time audio and visualization. Designed to improve accessibility for children with special needs through music and creative play.
+                        </p>
+                        <div>
+                            <a href="https://shaharfullstack.github.io/HandSynthBetter/" target="_blank" class="link-style mr-4">Live Demo</a>
+                            <a href="https://github.com/ShaharFullStack/HandSynthBetter" target="_blank" class="link-style">GitHub</a>
+                        </div>
+                    </div>
+                    <div class="project-card transition-shadow hover:shadow-xl">
+                        <h3 class="font-bold text-lg text-primary">BalloonGame</h3>
+                        <p class="mt-1 mb-3 text-base leading-relaxed">
+                            A 2D browser game demonstrating advanced game mechanics and user engagement. Features character control, obstacle navigation, and collection mechanics with realistic physics and intuitive user experience.
+                        </p>
+                        <div>
+                            <a href="https://shaharfullstack.github.io/BalloonGame/" target="_blank" class="link-style mr-4">Live Demo</a>
+                            <a href="https://github.com/ShaharFullStack/BalloonGame" target="_blank" class="link-style">GitHub</a>
+                        </div>
+                    </div>
+                    <div class="project-card transition-shadow hover:shadow-xl">
+                        <h3 class="font-bold text-lg text-primary">3D Flight Simulator</h3>
+                        <p class="mt-1 mb-3 text-base leading-relaxed">
+                            A web-based 3D flight simulator showcasing advanced WebGL capabilities and spatial UX design. Optimized for browser performance and immersive experience.
+                        </p>
+                        <div>
+                            <a href="https://shaharfullstack.github.io/3DFlightSimulator/" target="_blank" class="link-style mr-4">Live Demo</a>
+                            <a href="https://github.com/ShaharFullStack/3DFlight" target="_blank" class="link-style">GitHub</a>
+                        </div>
+                    </div>
+                `,
+                experienceTitle: "Professional Experience",
+                experienceContent: `
+                    <div class="experience-item">
+                        <div class="flex flex-col sm:flex-row justify-between sm:items-baseline">
+                            <h3 class="font-bold text-lg text-primary">Freelancer - Full Stack Developer & Creative Technologist</h3>
+                            <p class="font-medium text-secondary text-sm sm:text-base">2022 – Present</p>
+                        </div>
+                        <ul class="list-disc list-inside mt-2 space-y-2 text-base leading-relaxed">
+                            <li>Developing end-to-end digital solutions for startups and small businesses, from ideation and MVP development to deployment and scaling.</li>
+                            <li>Creating accessibility-focused interactive tools integrating music, visualization, and web camera interaction for organizations serving special needs communities. <a href="https://shaharfullstack.github.io/fluidHands/" class="link-style">(View Project)</a></li>
+                            <li>Building custom web applications that merge UX design, music theory, and modern web technologies to enhance user engagement. <a href="https://shaharfullstack.github.io/ChordBlast/" class="link-style">(View Project)</a></li>
+                            <li>Designing automation solutions using Puppeteer and Node.js for musicians and content creators to streamline workflows. <a href="https://drive.google.com/file/d/1A8Ifpv-LHKC-ZB2iy0zcjeaFX_Qlyqf5/view" class="link-style">(Demo Video)</a></li>
+                            <li>Delivering full-stack business solutions including portfolio websites and e-commerce platforms. <a href="https://sfez-nadlan.web.app/" class="link-style">(Business Example)</a></li>
+                            <li><strong>Achievement:</strong> Won 2nd place in GameJam competition with innovative 3D remake of Scorched Earth, demonstrating rapid prototyping skills and creative problem-solving.</li>
+                        </ul>
+                    </div>
+                    <div class="experience-item">
+                        <div class="flex flex-col sm:flex-row justify-between sm:items-baseline">
+                            <h3 class="font-bold text-lg text-primary">Musician, Educator & Event Manager</h3>
+                            <p class="font-medium text-secondary text-sm sm:text-base">2007 – 2022</p>
+                        </div>
+                        <p class="italic text-secondary">Various Institutions (Israel)</p>
+                        <ul class="list-disc list-inside mt-2 space-y-2 text-base leading-relaxed">
+                            <li>Led educational programs integrating technology and music, developing curricula that increased student engagement through digital tool integration.</li>
+                            <li>Managed large-scale events and performances with up to 200 participants and audiences of over 1,000, developing project management skills and stakeholder coordination.</li>
+                            <li>Developed UX expertise through optimizing audience engagement and designing event flows.</li>
+                        </ul>
+                    </div>
+                `,
+                educationTitle: "Education",
+                educationContent: `
+                    <div class="flex flex-col sm:flex-row justify-between sm:items-baseline">
+                        <h3 class="font-bold text-lg text-primary">Full Stack Development - Software Developer Training Track</h3>
+                        <p class="font-medium text-secondary text-sm sm:text-base">2023</p>
+                    </div>
+                    <p class="italic text-secondary">John Bryce (Matrix Group)</p>
+                    <p class="mt-2 text-base leading-relaxed">
+                        Comprehensive training in modern web development technologies including HTML, CSS, JavaScript, React, Node.js, TypeScript, SQL, and deployment of production-ready full-stack applications.
+                    </p>
+                    <p class="mt-1 text-base leading-relaxed">
+                        <strong class="font-semibold">Final Project:</strong> Enterprise-level vacation management system including user authentication, real-time booking management, Docker containerization, and AWS cloud deployment.
+                    </p>
+                `,
+                languagesTitle: "Languages",
+                languagesContent: `
+                    <span class="font-semibold">Hebrew</span> – Native |
+                    <span class="font-semibold">English</span> – High Level
+                `
+            }
+        };
+
+        // Theme management
+        let isDarkMode = false;
+        let currentLanguage = 'he';
+
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            const body = document.body;
+            const themeIcon = document.getElementById('theme-icon');
+            const themeText = document.getElementById('theme-text');
+            
+            if (isDarkMode) {
+                body.setAttribute('data-theme', 'dark');
+                themeIcon.innerHTML = '<path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>';
+                themeText.textContent = currentLanguage === 'he' ? 'ערכת נושא בהירה' : 'Light Theme';
+            } else {
+                body.removeAttribute('data-theme');
+                themeIcon.innerHTML = '<path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>';
+                themeText.textContent = currentLanguage === 'he' ? 'ערכת נושא כהה' : 'Dark Theme';
+            }
+        }
+
+        function toggleLanguage() {
+            currentLanguage = currentLanguage === 'he' ? 'en' : 'he';
+            const htmlRoot = document.getElementById('html-root');
+            const body = document.body;
+            const themeText = document.getElementById('theme-text');
+            const languageText = document.getElementById('language-text');
+            
+            // Update HTML attributes
+            htmlRoot.setAttribute('lang', currentLanguage);
+            htmlRoot.setAttribute('dir', currentLanguage === 'he' ? 'rtl' : 'ltr');
+            body.setAttribute('lang', currentLanguage);
+            
+            // Update title
+            document.title = currentLanguage === 'he' 
+                ? "שחר מעוז - טכנולוג קריאייטיב ומפתח פול סטאק"
+                : "Shahar Maoz - Creative Technologist & Full Stack Developer";
+            
+            // Update all text content
+            const translation = translations[currentLanguage];
+            
+            document.getElementById('name').textContent = translation.name;
+            document.getElementById('title').textContent = translation.title;
+            document.getElementById('github-text').textContent = translation.githubText;
+            document.getElementById('linkedin-text').textContent = translation.linkedinText;
+            document.getElementById('portfolio-text').textContent = translation.portfolioText;
+            document.getElementById('print-text').textContent = translation.printText;
+            document.getElementById('summary-title').textContent = translation.summaryTitle;
+            document.getElementById('summary-content').innerHTML = translation.summaryContent;
+            document.getElementById('skills-title').textContent = translation.skillsTitle;
+            document.getElementById('projects-title').textContent = translation.projectsTitle;
+            document.getElementById('projects-content').innerHTML = translation.projectsContent;
+            document.getElementById('experience-title').textContent = translation.experienceTitle;
+            document.getElementById('experience-content').innerHTML = translation.experienceContent;
+            document.getElementById('education-title').textContent = translation.educationTitle;
+            document.getElementById('education-content').innerHTML = translation.educationContent;
+            document.getElementById('languages-title').textContent = translation.languagesTitle;
+            document.getElementById('languages-content').innerHTML = translation.languagesContent;
+            
+            // Update button texts
+            themeText.textContent = isDarkMode 
+                ? (currentLanguage === 'he' ? 'ערכת נושא בהירה' : 'Light Theme')
+                : (currentLanguage === 'he' ? 'ערכת נושא כהה' : 'Dark Theme');
+            languageText.textContent = translation.languageText;
+            
+            // Add fade transition effect
+            const mainContainer = document.querySelector('.main-container');
+            mainContainer.classList.add('fade-transition');
+            setTimeout(() => {
+                mainContainer.classList.add('visible');
+            }, 150);
+        }
+
+        // Event listeners
+        document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+        document.getElementById('language-toggle').addEventListener('click', toggleLanguage);
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            const mainContainer = document.querySelector('.main-container');
+            mainContainer.classList.add('fade-transition', 'visible');
+        });
+    </script>
+</body>
+</html>
